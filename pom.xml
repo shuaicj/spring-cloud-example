@@ -16,6 +16,7 @@
 
     <modules>
         <module>hello-netflix-eureka</module>
+        <module>hello-cloud-config</module>
     </modules>
 
     <properties>
