@@ -15,8 +15,8 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>hello-netflix-eureka</module>
         <module>hello-cloud-config</module>
+        <module>hello-netflix-eureka</module>
     </modules>
 
     <properties>
@@ -24,6 +24,7 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <docker.image.prefix>shuaicj</docker.image.prefix>
     </properties>
 
     <dependencyManagement>
@@ -91,6 +92,11 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
                     <version>3.0.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>com.spotify</groupId>
+                    <artifactId>docker-maven-plugin</artifactId>
+                    <version>0.4.11</version>
                 </plugin>
             </plugins>
         </pluginManagement>
