@@ -1,4 +1,4 @@
-package shuaicj.hello.cloud.netflix.eureka.server;
+package shuaicj.hello.cloud.netflix.eureka;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

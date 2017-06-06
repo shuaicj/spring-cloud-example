@@ -1,7 +1,13 @@
 # Hello Spring Cloud
 
-- **hello-cloud-config** - usage of spring cloud config
-- **hello-netflix-eureka** - usage of netflix eureka
-    - **hello-netflix-eureka-client** - eureka client
-    - **hello-netflix-eureka-server** - eureka server
+#### Start
+Start each service in seperate docker containers. Make sure `docker daemon` is running and all ports referenced in `start.sh` are available.
+- `mvn package`
+- `./start.sh`
 
+#### Stop
+- `./stop.sh`
+
+#### Modules
+- **hello-cloud-config** - usage of spring cloud config
+- **hello-cloud-netflix-eureka** - usage of netflix eureka
