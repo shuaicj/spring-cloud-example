@@ -1,13 +1,14 @@
 # Hello Spring Cloud
 
 #### Start
-Start each service in seperate docker containers. Make sure `docker daemon` is running and all ports referenced in `start.sh` are available.
+Make sure `docker daemon` is running and all ports referenced in `.env` are available.
 - `mvn package`
-- `./start.sh`
+- `docker-compose up`
 
 #### Stop
-- `./stop.sh`
+- `Ctrol + C`
 
 #### Modules
 - **hello-cloud-config** - usage of spring cloud config
-- **hello-cloud-netflix-eureka** - usage of netflix eureka
+- **hello-cloud-registry** - usage of netflix eureka
+- **hello-cloud-service-bakery** - a bakery service

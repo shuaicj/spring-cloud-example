@@ -1,16 +1,16 @@
-package shuaicj.hello.cloud.netflix.eureka;
+package shuaicj.hello.cloud.service.bakery;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
- * Eureka server.
+ * A bakery service where people can get breads.
  *
- * @author shuaicj 2017/05/27
+ * @author shuaicj 2017/06/06
  */
 @SpringBootApplication
-@EnableEurekaServer
+// @EnableDiscoveryClient
 public class Application {
 
     public static void main(String[] args) {

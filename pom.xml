@@ -16,7 +16,8 @@
 
     <modules>
         <module>hello-cloud-config</module>
-        <module>hello-cloud-netflix-eureka</module>
+        <module>hello-cloud-service-bakery</module>
+        <module>hello-cloud-registry</module>
     </modules>
 
     <properties>

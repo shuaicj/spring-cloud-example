@@ -1,0 +1,9 @@
+spring:
+  application.name: bakery
+  cloud.config:
+    uri: ${CONFIG_SERVICE_URL:http://localhost:8888}
+    fail-fast: true
+
+eureka.client.erviceUrl.defaultZone: ${REGISTRY_SERVICE_URL:http://127.0.0.1:8761/eureka}
+
+management.security.enabled: false

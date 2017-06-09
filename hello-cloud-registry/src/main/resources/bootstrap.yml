@@ -1,0 +1,9 @@
+spring:
+  application.name: registry
+
+server.port: ${PORT:8761}
+
+eureka.client.register-with-eureka: false
+eureka.client.fetch-registry: false
+
+management.security.enabled: false

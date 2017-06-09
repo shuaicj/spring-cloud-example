@@ -1,0 +1,48 @@
+version: '2.1'
+
+# check the env variables in .env
+
+services:
+  config:
+    image: shuaicj/hello-cloud-config
+    environment:
+      PORT: ${CONFIG_PORT}
+    ports:
+      - ${CONFIG_PORT}:${CONFIG_PORT}
+    expose:
+      - ${CONFIG_PORT}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:${CONFIG_PORT}/health"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+
+  registry:
+    image: shuaicj/hello-cloud-registry
+    environment:
+      PORT: ${REGISTRY_PORT}
+    ports:
+      - ${REGISTRY_PORT}:${REGISTRY_PORT}
+    expose:
+      - ${REGISTRY_PORT}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:${REGISTRY_PORT}/health"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+
+  bakery:
+    image: shuaicj/hello-cloud-service-bakery
+    environment:
+      PORT: ${BAKERY_PORT}
+      CONFIG_SERVICE_URL: http://config:${CONFIG_PORT}
+      REGISTRY_SERVICE_URL: http://registry:${REGISTRY_PORT}/eureka
+    ports:
+      - ${BAKERY_PORT}:${BAKERY_PORT}
+    expose:
+      - ${BAKERY_PORT}
+    depends_on:
+      config:
+        condition: service_healthy
+      registry:
+        condition: service_healthy
