@@ -1,9 +1,11 @@
 spring:
-  application.name: registry
+  application:
+    name: registry
+  cloud:
+    config:
+      uri: ${CONFIG_SERVICE_URL:http://localhost:8888}
+      failFast: true
 
-server.port: ${PORT:8761}
-
-eureka.client.register-with-eureka: false
-eureka.client.fetch-registry: false
-
-management.security.enabled: false
+management:
+  security:
+    enabled: false

@@ -3,10 +3,10 @@
 #### Start
 Make sure `docker daemon` is running and all ports referenced in `.env` are available.
 - `mvn package`
-- `docker-compose up`
+- `docker-compose up -d`
 
 #### Stop
-- `Ctrol + C`
+- `docker-compose down`
 
 #### Modules
 - **hello-cloud-config** - usage of spring cloud config

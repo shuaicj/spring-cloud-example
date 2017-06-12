@@ -1,8 +1,17 @@
-server.port: ${PORT:8888}
+server:
+  port: ${PORT:8888}
 
 spring:
-  application.name: config
-  profiles.active: native
-  cloud.config.server.native.searchLocations: classpath:/config
+  application:
+    name: config
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          searchLocations: classpath:/config
 
-management.security.enabled: false
+management:
+  security:
+    enabled: false

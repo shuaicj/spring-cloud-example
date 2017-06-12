@@ -25,11 +25,8 @@ public class BakeryController {
     @Value("${server.port}")
     private int port;
 
-    @Value("${bakery.name}")
-    private String bakeryName;
-
-    @GetMapping("/breads/{bread-name}")
-    public String getBread(@RequestParam String customer, @PathVariable("bread-name") String breadName) {
-        return host + ":" + ip + ":" + port + " " + bakeryName + " [" + customer + "] get bread [" + breadName + "]";
+    @GetMapping("/breads/{name}")
+    public String getBread(@RequestParam String customer, @PathVariable String name) {
+        return host + ":" + ip + ":" + port + " [" + customer + "] get bread [" + name + "]";
     }
 }
