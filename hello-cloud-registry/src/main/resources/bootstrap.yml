@@ -6,6 +6,3 @@ spring:
       uri: ${CONFIG_SERVICE_URL:http://localhost:8888}
       failFast: true
 
-management:
-  security:
-    enabled: false

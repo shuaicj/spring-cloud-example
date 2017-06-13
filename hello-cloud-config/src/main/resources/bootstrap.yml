@@ -12,6 +12,3 @@ spring:
         native:
           searchLocations: classpath:/config
 
-management:
-  security:
-    enabled: false
