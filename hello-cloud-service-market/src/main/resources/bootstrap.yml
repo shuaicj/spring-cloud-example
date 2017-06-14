@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: market
+  cloud:
+    config:
+      uri: ${CONFIG_SERVICE_URL:http://localhost:8888}
+      failFast: true
+

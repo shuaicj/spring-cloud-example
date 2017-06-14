@@ -19,6 +19,7 @@
         <module>hello-cloud-registry</module>
         <module>hello-cloud-gateway</module>
         <module>hello-cloud-service-bakery</module>
+        <module>hello-cloud-service-market</module>
     </modules>
 
     <properties>

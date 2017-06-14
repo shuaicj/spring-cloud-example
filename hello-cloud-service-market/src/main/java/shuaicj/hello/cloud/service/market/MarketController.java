@@ -1,5 +1,6 @@
-package shuaicj.hello.cloud.service.bakery;
+package shuaicj.hello.cloud.service.market;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,11 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * Rest controller.
  *
- * @author shuaicj 2017/06/06
+ * @author shuaicj 2017/06/14
  */
 @RestController
 @RefreshScope
-public class BakeryController {
+public class MarketController {
 
     @Value("#{T(java.net.InetAddress).getLocalHost().getHostName()}")
     private String host;
@@ -25,12 +26,16 @@ public class BakeryController {
     @Value("${server.port}")
     private int port;
 
-    @Value("${bakery.bread.price}")
+    @Value("${market.bread.price}")
     private int price;
+
+    @Autowired
+    private FeignBakery bakery;
 
     @GetMapping("/breads/{name}")
     public String getBread(@RequestParam String customer, @PathVariable String name) {
-        return "[" + host + " " + ip + ":" + port + " bakery] "
-                + customer + " spend $" + price + " on " + name + "\n";
+        return "[" + host + " " + ip + ":" + port + " market] "
+                + customer + " spend $" + price + " on " + name
+                + "\n  --> " + bakery.getBread("market", name);
     }
 }

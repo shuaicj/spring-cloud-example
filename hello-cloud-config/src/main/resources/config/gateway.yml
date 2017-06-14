@@ -12,3 +12,7 @@ zuul:
       path: /bakery/**
       serviceId: bakery
       stripPrefix: false
+    market:
+      path: /market/**
+      serviceId: market
+      stripPrefix: false
