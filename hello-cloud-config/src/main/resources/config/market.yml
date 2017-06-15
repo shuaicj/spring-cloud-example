@@ -10,3 +10,7 @@ eureka:
 market:
   bread:
     price: 3
+  feign:
+    bakery:
+      name: bakery
+      path: /bakery

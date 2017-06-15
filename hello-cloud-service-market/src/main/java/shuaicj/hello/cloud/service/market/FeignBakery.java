@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
  *
  * @author shuaicj 2017/06/14
  */
-@FeignClient("bakery")
+@FeignClient(name = "${market.feign.bakery.name}", path = "${market.feign.bakery.path}")
 public interface FeignBakery {
 
-    @GetMapping("/bakery/breads/{name}")
+    @GetMapping("/breads/{name}")
     String getBread(@RequestParam("customer") String customer, @PathVariable("name") String name);
 }

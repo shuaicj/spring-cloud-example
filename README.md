@@ -4,7 +4,7 @@
 Make sure `docker daemon` is running and port 8080 is available.
 - `mvn package`
 - `docker-compose up -d`
-- Optional `docker-compose scale ...`
+- Optional `docker-compose scale bakery=3 market=3`
 
 #### Check
 There are two services here: bakery and market. People can get bread at a bakery or at a market, however, the market makes the bakery as its bread supplier actually.
