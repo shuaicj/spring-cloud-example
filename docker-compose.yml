@@ -17,11 +17,14 @@ services:
       timeout: 3s
       retries: 3
 
-  registry:
+  registry1:
     image: shuaicj/hello-cloud-registry
     environment:
+      HOSTNAME: registry1
       PORT: ${REGISTRY_PORT}
       CONFIG_SERVICE_URL: http://config:${CONFIG_PORT}
+      REGISTRY_SERVICE_HA: "true"
+      REGISTRY_SERVICE_URL: http://registry1:${REGISTRY_PORT}/eureka,http://registry2:${REGISTRY_PORT}/eureka,http://registry3:${REGISTRY_PORT}/eureka
 #    ports:
 #      - ${REGISTRY_PORT}:${REGISTRY_PORT}
     expose:
@@ -29,18 +32,45 @@ services:
     depends_on:
       config:
         condition: service_healthy
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:${REGISTRY_PORT}/health"]
-      interval: 5s
-      timeout: 3s
-      retries: 3
+
+  registry2:
+    image: shuaicj/hello-cloud-registry
+    environment:
+      HOSTNAME: registry2
+      PORT: ${REGISTRY_PORT}
+      CONFIG_SERVICE_URL: http://config:${CONFIG_PORT}
+      REGISTRY_SERVICE_HA: "true"
+      REGISTRY_SERVICE_URL: http://registry1:${REGISTRY_PORT}/eureka,http://registry2:${REGISTRY_PORT}/eureka,http://registry3:${REGISTRY_PORT}/eureka
+#    ports:
+#      - ${REGISTRY_PORT}:${REGISTRY_PORT}
+    expose:
+      - ${REGISTRY_PORT}
+    depends_on:
+      config:
+        condition: service_healthy
+
+  registry3:
+    image: shuaicj/hello-cloud-registry
+    environment:
+      HOSTNAME: registry3
+      PORT: ${REGISTRY_PORT}
+      CONFIG_SERVICE_URL: http://config:${CONFIG_PORT}
+      REGISTRY_SERVICE_HA: "true"
+      REGISTRY_SERVICE_URL: http://registry1:${REGISTRY_PORT}/eureka,http://registry2:${REGISTRY_PORT}/eureka,http://registry3:${REGISTRY_PORT}/eureka
+#    ports:
+#      - ${REGISTRY_PORT}:${REGISTRY_PORT}
+    expose:
+      - ${REGISTRY_PORT}
+    depends_on:
+      config:
+        condition: service_healthy
 
   gateway:
     image: shuaicj/hello-cloud-gateway
     environment:
       PORT: ${GATEWAY_PORT}
       CONFIG_SERVICE_URL: http://config:${CONFIG_PORT}
-      REGISTRY_SERVICE_URL: http://registry:${REGISTRY_PORT}/eureka
+      REGISTRY_SERVICE_URL: http://registry1:${REGISTRY_PORT}/eureka,http://registry2:${REGISTRY_PORT}/eureka,http://registry3:${REGISTRY_PORT}/eureka
     ports:
       - ${GATEWAY_PORT}:${GATEWAY_PORT}
     expose:
@@ -48,15 +78,13 @@ services:
     depends_on:
       config:
         condition: service_healthy
-      registry:
-        condition: service_healthy
 
   bakery:
     image: shuaicj/hello-cloud-service-bakery
     environment:
       PORT: ${BAKERY_PORT}
       CONFIG_SERVICE_URL: http://config:${CONFIG_PORT}
-      REGISTRY_SERVICE_URL: http://registry:${REGISTRY_PORT}/eureka
+      REGISTRY_SERVICE_URL: http://registry1:${REGISTRY_PORT}/eureka,http://registry2:${REGISTRY_PORT}/eureka,http://registry3:${REGISTRY_PORT}/eureka
 #    ports:
 #      - ${BAKERY_PORT}:${BAKERY_PORT}
     expose:
@@ -64,21 +92,17 @@ services:
     depends_on:
       config:
         condition: service_healthy
-      registry:
-        condition: service_healthy
 
   market:
     image: shuaicj/hello-cloud-service-market
     environment:
       PORT: ${MARKET_PORT}
       CONFIG_SERVICE_URL: http://config:${CONFIG_PORT}
-      REGISTRY_SERVICE_URL: http://registry:${REGISTRY_PORT}/eureka
+      REGISTRY_SERVICE_URL: http://registry1:${REGISTRY_PORT}/eureka,http://registry2:${REGISTRY_PORT}/eureka,http://registry3:${REGISTRY_PORT}/eureka
 #    ports:
 #      - ${MARKET_PORT}:${MARKET_PORT}
     expose:
       - ${MARKET_PORT}
     depends_on:
       config:
-        condition: service_healthy
-      registry:
         condition: service_healthy
