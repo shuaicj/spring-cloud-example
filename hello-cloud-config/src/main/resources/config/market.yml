@@ -1,6 +1,5 @@
 server:
   port: ${PORT:8082}
-  contextPath: /market
 
 eureka:
   client:
