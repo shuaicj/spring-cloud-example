@@ -1,6 +1,5 @@
 # Hello Spring Cloud
 
-#### Description
 An example for learning Spring Cloud.
 
 #### Start in IDE
