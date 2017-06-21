@@ -1,7 +1,7 @@
 # Hello Spring Cloud
 
 #### Description
-A learning example of Spring Cloud.
+An example for learning Spring Cloud.
 
 #### Start in IDE
 Make sure all ports 8888, 8761, 8080, 8081, 8082 are available.
