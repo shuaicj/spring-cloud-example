@@ -1,6 +1,15 @@
-# Hello Spring Cloud
+# Spring Cloud Example
 
 An example for learning Spring Cloud.
+
+![Overview](overview.png?raw=true "Overview")
+
+#### Modules
+- **cloud-config** - usage of `spring cloud config`
+- **cloud-gateway** - usage of `spring cloud netflix zuul`
+- **cloud-registry** - usage of `spring cloud netflix eureka`
+- **cloud-service-bakery** - a bakery service where you get bread
+- **cloud-service-market** - a market service where you can also get bread but depending on bakery
 
 #### Start in Terminal
 Make sure all ports 8888, 8761, 8080, 8081, 8082 are available.
@@ -33,10 +42,3 @@ Wait about two minutes to make sure all services have registered successfully, a
 
 #### Stop in Docker
 - `$ docker-compose down`
-
-#### Modules
-- **cloud-config** - usage of `spring cloud config`
-- **cloud-gateway** - usage of `netflix zuul`
-- **cloud-registry** - usage of `netflix eureka`
-- **cloud-service-bakery** - a bakery service
-- **cloud-service-market** - a market service who calls bakery
