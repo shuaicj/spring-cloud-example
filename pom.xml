@@ -9,17 +9,17 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>shuaicj.hello.cloud</groupId>
-    <artifactId>hello-cloud-parent</artifactId>
+    <groupId>shuaicj.example.cloud</groupId>
+    <artifactId>cloud-example-parent</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>hello-cloud-config</module>
-        <module>hello-cloud-registry</module>
-        <module>hello-cloud-gateway</module>
-        <module>hello-cloud-service-bakery</module>
-        <module>hello-cloud-service-market</module>
+        <module>cloud-config</module>
+        <module>cloud-registry</module>
+        <module>cloud-gateway</module>
+        <module>cloud-service-bakery</module>
+        <module>cloud-service-market</module>
     </modules>
 
     <properties>
@@ -39,63 +39,12 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <dependency>
-                <groupId>org.assertj</groupId>
-                <artifactId>assertj-core</artifactId>
-                <version>3.6.1</version>
-                <scope>test</scope>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 
     <build>
         <pluginManagement>
             <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.1</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-assembly-plugin</artifactId>
-                    <version>2.6</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-resources-plugin</artifactId>
-                    <version>2.6</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <version>2.6</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-war-plugin</artifactId>
-                    <version>2.6</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-shade-plugin</artifactId>
-                    <version>2.4.3</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.18.1</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-antrun-plugin</artifactId>
-                    <version>1.8</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-dependency-plugin</artifactId>
-                    <version>3.0.0</version>
-                </plugin>
                 <plugin>
                     <groupId>com.spotify</groupId>
                     <artifactId>docker-maven-plugin</artifactId>

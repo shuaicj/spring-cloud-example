@@ -4,7 +4,7 @@ version: '2.1'
 
 services:
   config:
-    image: shuaicj/hello-cloud-config
+    image: shuaicj/cloud-config
     environment:
       PORT: ${CONFIG_PORT}
 #    ports:
@@ -18,7 +18,7 @@ services:
       retries: 3
 
   registry1:
-    image: shuaicj/hello-cloud-registry
+    image: shuaicj/cloud-registry
     environment:
       HOSTNAME: registry1
       PORT: ${REGISTRY_PORT}
@@ -34,7 +34,7 @@ services:
         condition: service_healthy
 
   registry2:
-    image: shuaicj/hello-cloud-registry
+    image: shuaicj/cloud-registry
     environment:
       HOSTNAME: registry2
       PORT: ${REGISTRY_PORT}
@@ -50,7 +50,7 @@ services:
         condition: service_healthy
 
   registry3:
-    image: shuaicj/hello-cloud-registry
+    image: shuaicj/cloud-registry
     environment:
       HOSTNAME: registry3
       PORT: ${REGISTRY_PORT}
@@ -66,7 +66,7 @@ services:
         condition: service_healthy
 
   gateway:
-    image: shuaicj/hello-cloud-gateway
+    image: shuaicj/cloud-gateway
     environment:
       PORT: ${GATEWAY_PORT}
       CONFIG_SERVICE_URL: http://config:${CONFIG_PORT}
@@ -80,7 +80,7 @@ services:
         condition: service_healthy
 
   bakery:
-    image: shuaicj/hello-cloud-service-bakery
+    image: shuaicj/cloud-service-bakery
     environment:
       PORT: ${BAKERY_PORT}
       CONFIG_SERVICE_URL: http://config:${CONFIG_PORT}
@@ -94,7 +94,7 @@ services:
         condition: service_healthy
 
   market:
-    image: shuaicj/hello-cloud-service-market
+    image: shuaicj/cloud-service-market
     environment:
       PORT: ${MARKET_PORT}
       CONFIG_SERVICE_URL: http://config:${CONFIG_PORT}

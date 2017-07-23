@@ -5,11 +5,11 @@ An example for learning Spring Cloud.
 #### Start in Terminal
 Make sure all ports 8888, 8761, 8080, 8081, 8082 are available.
 Start each service directly in the following order:
-- `$ cd hello-cloud-config && mvn spring-boot:run`
-- `$ cd hello-cloud-registry && mvn spring-boot:run`
-- `$ cd hello-cloud-gateway && mvn spring-boot:run`
-- `$ cd hello-cloud-service-bakery && mvn spring-boot:run`
-- `$ cd hello-cloud-service-market && mvn spring-boot:run`
+- `$ cd cloud-config && mvn spring-boot:run`
+- `$ cd cloud-registry && mvn spring-boot:run`
+- `$ cd cloud-gateway && mvn spring-boot:run`
+- `$ cd cloud-service-bakery && mvn spring-boot:run`
+- `$ cd cloud-service-market && mvn spring-boot:run`
 > If everything is ok, each service will be running with only one instance.
 
 #### Start in Docker
@@ -35,8 +35,8 @@ Wait about two minutes to make sure all services have registered successfully, a
 - `$ docker-compose down`
 
 #### Modules
-- **hello-cloud-config** - usage of `spring cloud config`
-- **hello-cloud-gateway** - usage of `netflix zuul`
-- **hello-cloud-registry** - usage of `netflix eureka`
-- **hello-cloud-service-bakery** - a bakery service
-- **hello-cloud-service-market** - a market service who calls bakery
+- **cloud-config** - usage of `spring cloud config`
+- **cloud-gateway** - usage of `netflix zuul`
+- **cloud-registry** - usage of `netflix eureka`
+- **cloud-service-bakery** - a bakery service
+- **cloud-service-market** - a market service who calls bakery
