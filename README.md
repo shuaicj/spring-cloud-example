@@ -24,8 +24,7 @@ Start each service directly in the following order:
 #### Start in Docker
 Make sure `docker daemon` is running and port 8080 is available.
 - `$ mvn package`
-- `$ docker-compose up -d`
-- `$ docker-compose scale bakery=3 market=3`
+- `$ docker-compose up -d --scale bakery=3 --scale market=3`
 > If everything is ok, the service `config` and `gateway` will be running with one instance,
 while the `registry`, `bakery` and `market` with three instances.
 
