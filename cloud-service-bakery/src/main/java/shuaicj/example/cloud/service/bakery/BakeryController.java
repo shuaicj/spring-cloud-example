@@ -1,7 +1,8 @@
 package shuaicj.example.cloud.service.bakery;
 
+import java.util.concurrent.TimeUnit;
+
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
  * @author shuaicj 2017/06/06
  */
 @RestController
-@RefreshScope
 @RequestMapping("/bakery")
 public class BakeryController {
 
@@ -31,7 +31,10 @@ public class BakeryController {
     private int price;
 
     @GetMapping("/breads/{name}")
-    public String getBread(@RequestParam String customer, @PathVariable String name) {
+    public String getBread(@RequestParam String customer, @PathVariable String name) throws Exception {
+        if (Math.random() > 0.8) {
+            TimeUnit.MILLISECONDS.sleep(2000); //randomly sleep for triggering hystrix fallback
+        }
         return "[" + host + " " + ip + ":" + port + " bakery] "
                 + customer + " spend $" + price + " on " + name + "\n";
     }
