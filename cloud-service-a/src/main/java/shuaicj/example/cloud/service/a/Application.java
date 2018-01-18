@@ -1,18 +1,20 @@
-package shuaicj.example.cloud.config;
+package shuaicj.example.cloud.service.a;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.config.server.EnableConfigServer;
+import org.springframework.cloud.netflix.feign.EnableFeignClients;
 
 /**
- * Config server.
+ * Service A.
  *
- * @author shuaicj 2017/06/02
+ * @author shuaicj 2017/06/06
  */
 @SpringBootApplication
-@EnableConfigServer
 @EnableDiscoveryClient
+@EnableFeignClients
+@EnableCircuitBreaker
 public class Application {
 
     public static void main(String[] args) {

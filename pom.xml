@@ -15,11 +15,11 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>cloud-config</module>
         <module>cloud-registry</module>
+        <module>cloud-config</module>
         <module>cloud-gateway</module>
-        <module>cloud-service-bakery</module>
-        <module>cloud-service-market</module>
+        <module>cloud-service-a</module>
+        <module>cloud-service-b</module>
     </modules>
 
     <properties>

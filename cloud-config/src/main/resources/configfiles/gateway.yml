@@ -1,0 +1,24 @@
+server:
+  port: ${PORT:8080}
+
+zuul:
+  ignoredServices: '*'
+  routes:
+    service-a:
+      path: /a/**
+      serviceId: service-a
+      stripPrefix: false
+    service-b:
+      path: /b/**
+      serviceId: service-b
+      stripPrefix: false
+
+ribbon:
+  ReadTimeout: 5000 # must be longer than service-a and service-b ribbon.ReadTimeout
+
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: false # disable hystrix timeout so that feign can focus on ribbon timeout only

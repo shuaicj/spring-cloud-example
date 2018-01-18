@@ -1,6 +1,6 @@
 spring:
   application:
-    name: gateway
+    name: service-b
   cloud:
     config:
       discovery:

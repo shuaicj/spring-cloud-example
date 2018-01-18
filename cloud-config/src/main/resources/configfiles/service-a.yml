@@ -1,0 +1,23 @@
+server:
+  port: ${PORT:8081}
+
+feign:
+  hystrix:
+    enabled: true
+
+service-a:
+  unstable:
+    sleepMilliseconds: 2000
+
+service-b:
+  ribbon:
+    ReadTimeout: 1000 # ribbon timeout here MUST be shorter than service-b.unstable.sleepMilliseconds in service-b.yml
+                      # to trigger hystrix fallback
+
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: false # disable hystrix timeout so that feign can focus on ribbon timeout only
+

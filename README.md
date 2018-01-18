@@ -8,8 +8,8 @@ An example for learning Spring Cloud.
 - **cloud-config** - usage of `spring cloud config`
 - **cloud-gateway** - usage of `spring cloud netflix zuul`
 - **cloud-registry** - usage of `spring cloud netflix eureka`
-- **cloud-service-bakery** - a bakery service where you get bread
-- **cloud-service-market** - a market service where you can also get bread but depending on bakery
+- **cloud-service-a** - a microservice called a 
+- **cloud-service-b** - a microservice called b
 
 #### Start in Terminal
 Make sure all ports 8888, 8761, 8080, 8081, 8082 are available.
@@ -24,7 +24,7 @@ Start each service directly in the following order:
 #### Start in Docker
 Make sure `docker daemon` is running and port 8080 is available.
 - `$ mvn package`
-- `$ docker-compose up -d --scale bakery=3 --scale market=3`
+- `$ docker-compose up -d --scale config=2 --scale service-a=2 --scale service-b=2`
 > If everything is ok, the service `config` and `gateway` will be running with one instance,
 while the `registry`, `bakery` and `market` with three instances.
 
@@ -32,7 +32,8 @@ while the `registry`, `bakery` and `market` with three instances.
 Vefiy services `bakery` and `market`.
 People can get bread at a bakery or at a market, however, the market makes the bakery as its bread supplier actually.
 Wait about two minutes to make sure all services have registered successfully, and:
-- `$ curl http://localhost:8080/bakery/breads/abcd?customer=shuaicj`
+- `$ curl http://localhost:8080/a/hello?name=shuaicj`
+- `$ curl http://localhost:8080/b/hello?name=shuaicj`
 - `$ curl http://localhost:8080/market/breads/abcd?customer=shuaicj`
 > Repeat serveral times and verify multiple service instances are working.
 
