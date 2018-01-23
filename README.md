@@ -8,37 +8,32 @@ An example for learning Spring Cloud.
 - **cloud-config** - usage of `spring cloud config`
 - **cloud-gateway** - usage of `spring cloud netflix zuul`
 - **cloud-registry** - usage of `spring cloud netflix eureka`
-- **cloud-service-a** - a microservice called a 
-- **cloud-service-b** - a microservice called b
+- **cloud-service-a** - service-a provides endpoints `/hello` and `/unstable`
+- **cloud-service-b** - service-b provides endpoints `/hello` and `/unstable`
 
-#### Start in Terminal
-Make sure all ports 8888, 8761, 8080, 8081, 8082 are available.
-Start each service directly in the following order:
-- `$ cd cloud-config && mvn spring-boot:run`
-- `$ cd cloud-registry && mvn spring-boot:run`
-- `$ cd cloud-gateway && mvn spring-boot:run`
-- `$ cd cloud-service-bakery && mvn spring-boot:run`
-- `$ cd cloud-service-market && mvn spring-boot:run`
-> If everything is ok, each service will be running with only one instance.
+#### Requirements
+- JDK 8
+- Maven 3.3.9+
+- Docker 1.12.0+
 
-#### Start in Docker
-Make sure `docker daemon` is running and port 8080 is available.
-- `$ mvn package`
-- `$ docker-compose up -d --scale config=2 --scale service-a=2 --scale service-b=2`
-> If everything is ok, the service `config` and `gateway` will be running with one instance,
-while the `registry`, `bakery` and `market` with three instances.
+#### How to Run
+Make sure the port 8080 is available.
+```
+$ mvn package
+$ docker-compose up --scale config=2 --scale service-a=2 --scale service-b=2
+```
+> It will take two or three minutes for all services are ready.
+> If everything is ok, each service will be running with 2 instances except `cloud-gateway`.
 
 #### Verify
-Vefiy services `bakery` and `market`.
-People can get bread at a bakery or at a market, however, the market makes the bakery as its bread supplier actually.
-Wait about two minutes to make sure all services have registered successfully, and:
-- `$ curl http://localhost:8080/a/hello?name=shuaicj`
-- `$ curl http://localhost:8080/b/hello?name=shuaicj`
-- `$ curl http://localhost:8080/market/breads/abcd?customer=shuaicj`
-> Repeat serveral times and verify multiple service instances are working.
+Repeat the following commands for several times:
+```
+$ curl http://localhost:8080/a/hello?name=shuaicj
+$ curl http://localhost:8080/b/hello?name=shuaicj
+```
+and check the content printed out:
+- Check the IPs of the same service. It means multiple service instances are working.
+- Check if `[FALLBACK]` appears. It means `Netflix Hystrix` is working.
 
-#### Stop in Terminal
-- `Ctrl + C`
-
-#### Stop in Docker
-- `$ docker-compose down`
+#### See Also
+[shuaicj/spring-cloud-tutorials](https://github.com/shuaicj/spring-cloud-tutorials)

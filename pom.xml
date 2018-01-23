@@ -48,7 +48,7 @@
                 <plugin>
                     <groupId>com.spotify</groupId>
                     <artifactId>docker-maven-plugin</artifactId>
-                    <version>0.4.11</version>
+                    <version>1.0.0</version>
                     <executions>
                         <execution>
                             <phase>package</phase>
@@ -65,6 +65,11 @@
                                 <targetPath>/</targetPath>
                                 <directory>${project.build.directory}</directory>
                                 <include>${project.build.finalName}.jar</include>
+                            </resource>
+                            <resource>
+                                <targetPath>/</targetPath>
+                                <directory>${project.basedir}/..</directory>
+                                <include>start*.sh</include>
                             </resource>
                         </resources>
                     </configuration>

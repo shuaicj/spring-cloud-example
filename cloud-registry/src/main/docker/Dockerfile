@@ -1,5 +1,5 @@
 FROM shuaicj/java:8.131.11
 VOLUME /tmp
 ADD cloud-registry-1.0.0.jar app.jar
-RUN sh -c 'touch /app.jar'
-ENTRYPOINT [ "java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/app.jar" ]
+ADD start.sh .
+RUN touch app.jar

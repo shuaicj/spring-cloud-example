@@ -10,15 +10,9 @@ services:
       PORT: ${REGISTRY_PORT}
       REGISTRY_SERVICE_HA: "true"
       REGISTRY_SERVICE_URL: http://registry1:${REGISTRY_PORT}/eureka,http://registry2:${REGISTRY_PORT}/eureka
-    ports:
-      - ${REGISTRY_PORT}:${REGISTRY_PORT}
     expose:
       - ${REGISTRY_PORT}
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:${REGISTRY_PORT}/health"]
-      interval: 5s
-      timeout: 3s
-      retries: 3
+    command: ["./start.sh"]
 
   registry2:
     image: shuaicj/cloud-registry
@@ -27,28 +21,18 @@ services:
       PORT: ${REGISTRY_PORT}
       REGISTRY_SERVICE_HA: "true"
       REGISTRY_SERVICE_URL: http://registry1:${REGISTRY_PORT}/eureka,http://registry2:${REGISTRY_PORT}/eureka
-#    ports:
-#      - ${REGISTRY_PORT}:${REGISTRY_PORT}
     expose:
       - ${REGISTRY_PORT}
+    command: ["./start.sh"]
 
   config:
     image: shuaicj/cloud-config
     environment:
       PORT: ${CONFIG_PORT}
       REGISTRY_SERVICE_URL: http://registry1:${REGISTRY_PORT}/eureka,http://registry2:${REGISTRY_PORT}/eureka
-#    ports:
-#      - ${CONFIG_PORT}:${CONFIG_PORT}
     expose:
       - ${CONFIG_PORT}
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:${CONFIG_PORT}/health"]
-      interval: 5s
-      timeout: 3s
-      retries: 3
-    depends_on:
-      registry1:
-        condition: service_healthy
+    command: ["./start-after-registry.sh", "registry1:${REGISTRY_PORT}", "registry2:${REGISTRY_PORT}"]
 
   gateway:
     image: shuaicj/cloud-gateway
@@ -59,33 +43,23 @@ services:
       - ${GATEWAY_PORT}:${GATEWAY_PORT}
     expose:
       - ${GATEWAY_PORT}
-    depends_on:
-      config:
-        condition: service_healthy
+    command: ["./start-after-config.sh", "registry1:${REGISTRY_PORT}", "registry2:${REGISTRY_PORT}"]
 
   service-a:
     image: shuaicj/cloud-service-a
     environment:
       PORT: ${SERVICE_A_PORT}
       REGISTRY_SERVICE_URL: http://registry1:${REGISTRY_PORT}/eureka,http://registry2:${REGISTRY_PORT}/eureka
-#    ports:
-#      - ${SERVICE_A_PORT}:${SERVICE_A_PORT}
     expose:
       - ${SERVICE_A_PORT}
-    depends_on:
-      config:
-        condition: service_healthy
+    command: ["./start-after-config.sh", "registry1:${REGISTRY_PORT}", "registry2:${REGISTRY_PORT}"]
 
   service-b:
     image: shuaicj/cloud-service-b
     environment:
       PORT: ${SERVICE_B_PORT}
       REGISTRY_SERVICE_URL: http://registry1:${REGISTRY_PORT}/eureka,http://registry2:${REGISTRY_PORT}/eureka
-#    ports:
-#      - ${SERVICE_B_PORT}:${SERVICE_B_PORT}
     expose:
       - ${SERVICE_B_PORT}
-    depends_on:
-      config:
-        condition: service_healthy
+    command: ["./start-after-config.sh", "registry1:${REGISTRY_PORT}", "registry2:${REGISTRY_PORT}"]
 
