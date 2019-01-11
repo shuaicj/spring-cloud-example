@@ -6,7 +6,7 @@ while true ; do
     ready="true"
 
     for host in $@ ; do
-        apps=$(curl -f -s http://$host/eureka/apps)
+        apps=$(curl -f -s -H "Accept: application/json" http://$host/eureka/apps/)
         exit_code=$?
 
         if [ $exit_code -ne 0 ] ; then
