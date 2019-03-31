@@ -3,9 +3,12 @@ spring:
     name: service-b
   cloud:
     config:
+      failFast: true
       discovery:
         enabled: true
         serviceId: config
+      retry:
+        maxAttempts: 300
 
 eureka:
   client:
