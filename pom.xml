@@ -11,7 +11,7 @@
 
     <groupId>shuaicj.example.cloud</groupId>
     <artifactId>cloud-example-parent</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -69,11 +69,6 @@
                                 <targetPath>/</targetPath>
                                 <directory>${project.build.directory}</directory>
                                 <include>${project.build.finalName}.jar</include>
-                            </resource>
-                            <resource>
-                                <targetPath>/</targetPath>
-                                <directory>${project.basedir}/..</directory>
-                                <include>start*.sh</include>
                             </resource>
                         </resources>
                     </configuration>

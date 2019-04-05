@@ -1,65 +1,59 @@
 version: '2.1'
 
-# check the env variables in .env
-
 services:
   registry1:
-    image: shuaicj/cloud-registry
+    image: shuaicj/cloud-registry:1.1.0
     environment:
       HOSTNAME: registry1
-      PORT: ${REGISTRY_PORT}
+      PORT: 8761
       REGISTRY_SERVICE_HA: "true"
-      REGISTRY_SERVICE_URL: http://registry1:${REGISTRY_PORT}/eureka,http://registry2:${REGISTRY_PORT}/eureka
+      REGISTRY_SERVICE_URL: http://registry1:8761/eureka,http://registry2:8761/eureka
     expose:
-      - ${REGISTRY_PORT}
-    command: ["./start.sh"]
+      - 8761
+    ports:
+      - 8761:8761
 
   registry2:
-    image: shuaicj/cloud-registry
+    image: shuaicj/cloud-registry:1.1.0
     environment:
       HOSTNAME: registry2
-      PORT: ${REGISTRY_PORT}
+      PORT: 8761
       REGISTRY_SERVICE_HA: "true"
-      REGISTRY_SERVICE_URL: http://registry1:${REGISTRY_PORT}/eureka,http://registry2:${REGISTRY_PORT}/eureka
+      REGISTRY_SERVICE_URL: http://registry1:8761/eureka,http://registry2:8761/eureka
     expose:
-      - ${REGISTRY_PORT}
-    command: ["./start.sh"]
+      - 8761
 
   config:
-    image: shuaicj/cloud-config
+    image: shuaicj/cloud-config:1.1.0
     environment:
-      PORT: ${CONFIG_PORT}
-      REGISTRY_SERVICE_URL: http://registry1:${REGISTRY_PORT}/eureka,http://registry2:${REGISTRY_PORT}/eureka
+      PORT: 8888
+      REGISTRY_SERVICE_URL: http://registry1:8761/eureka,http://registry2:8761/eureka
     expose:
-      - ${CONFIG_PORT}
-    command: ["./start-after-registry.sh", "registry1:${REGISTRY_PORT}", "registry2:${REGISTRY_PORT}"]
+      - 8888
 
   gateway:
-    image: shuaicj/cloud-gateway
+    image: shuaicj/cloud-gateway:1.1.0
     environment:
-      PORT: ${GATEWAY_PORT}
-      REGISTRY_SERVICE_URL: http://registry1:${REGISTRY_PORT}/eureka,http://registry2:${REGISTRY_PORT}/eureka
+      PORT: 8080
+      REGISTRY_SERVICE_URL: http://registry1:8761/eureka,http://registry2:8761/eureka
     ports:
-      - ${GATEWAY_PORT}:${GATEWAY_PORT}
+      - 8080:8080
     expose:
-      - ${GATEWAY_PORT}
-    command: ["./start-after-config.sh", "registry1:${REGISTRY_PORT}", "registry2:${REGISTRY_PORT}"]
+      - 8080
 
   service-a:
-    image: shuaicj/cloud-service-a
+    image: shuaicj/cloud-service-a:1.1.0
     environment:
-      PORT: ${SERVICE_A_PORT}
-      REGISTRY_SERVICE_URL: http://registry1:${REGISTRY_PORT}/eureka,http://registry2:${REGISTRY_PORT}/eureka
+      PORT: 8080
+      REGISTRY_SERVICE_URL: http://registry1:8761/eureka,http://registry2:8761/eureka
     expose:
-      - ${SERVICE_A_PORT}
-    command: ["./start-after-config.sh", "registry1:${REGISTRY_PORT}", "registry2:${REGISTRY_PORT}"]
+      - 8080
 
   service-b:
-    image: shuaicj/cloud-service-b
+    image: shuaicj/cloud-service-b:1.1.0
     environment:
-      PORT: ${SERVICE_B_PORT}
-      REGISTRY_SERVICE_URL: http://registry1:${REGISTRY_PORT}/eureka,http://registry2:${REGISTRY_PORT}/eureka
+      PORT: 8080
+      REGISTRY_SERVICE_URL: http://registry1:8761/eureka,http://registry2:8761/eureka
     expose:
-      - ${SERVICE_B_PORT}
-    command: ["./start-after-config.sh", "registry1:${REGISTRY_PORT}", "registry2:${REGISTRY_PORT}"]
+      - 8080
 
