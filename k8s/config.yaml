@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: config
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: config
+  template:
+    metadata:
+      labels:
+        app: config
+    spec:
+      containers:
+      - name: config
+        image: shuaicj/cloud-config:1.1.0
+        env:
+        - name: PORT
+          value: "8888"
+        - name: REGISTRY_SERVICE_URL
+          value: "http://registry-0.registry.default.svc.cluster.local:8761/eureka,http://registry-1.registry.default.svc.cluster.local:8761/eureka"
+        ports:
+        - name: http
+          containerPort: 8888
+
