@@ -1,59 +1,59 @@
 version: '2.1'
 
 services:
-  registry1:
-    image: shuaicj/cloud-registry:1.1.0
+  registry-0:
+    image: shuaicj/cloud-registry:1.2.0
+    hostname: registry-0
     environment:
-      HOSTNAME: registry1
       PORT: 8761
       REGISTRY_SERVICE_HA: "true"
-      REGISTRY_SERVICE_URL: http://registry1:8761/eureka,http://registry2:8761/eureka
+      REGISTRY_SERVICE_URL: http://registry-0:8761/eureka,http://registry-1:8761/eureka
     expose:
       - 8761
     ports:
       - 8761:8761
 
-  registry2:
-    image: shuaicj/cloud-registry:1.1.0
+  registry-1:
+    image: shuaicj/cloud-registry:1.2.0
+    hostname: registry-1
     environment:
-      HOSTNAME: registry2
       PORT: 8761
       REGISTRY_SERVICE_HA: "true"
-      REGISTRY_SERVICE_URL: http://registry1:8761/eureka,http://registry2:8761/eureka
+      REGISTRY_SERVICE_URL: http://registry-0:8761/eureka,http://registry-1:8761/eureka
     expose:
       - 8761
 
   config:
-    image: shuaicj/cloud-config:1.1.0
+    image: shuaicj/cloud-config:1.2.0
     environment:
       PORT: 8888
-      REGISTRY_SERVICE_URL: http://registry1:8761/eureka,http://registry2:8761/eureka
+      REGISTRY_SERVICE_URL: http://registry-0:8761/eureka,http://registry-1:8761/eureka
     expose:
       - 8888
 
   gateway:
-    image: shuaicj/cloud-gateway:1.1.0
+    image: shuaicj/cloud-gateway:1.2.0
     environment:
       PORT: 8080
-      REGISTRY_SERVICE_URL: http://registry1:8761/eureka,http://registry2:8761/eureka
+      REGISTRY_SERVICE_URL: http://registry-0:8761/eureka,http://registry-1:8761/eureka
     ports:
       - 8080:8080
     expose:
       - 8080
 
   service-a:
-    image: shuaicj/cloud-service-a:1.1.0
+    image: shuaicj/cloud-service-a:1.2.0
     environment:
       PORT: 8080
-      REGISTRY_SERVICE_URL: http://registry1:8761/eureka,http://registry2:8761/eureka
+      REGISTRY_SERVICE_URL: http://registry-0:8761/eureka,http://registry-1:8761/eureka
     expose:
       - 8080
 
   service-b:
-    image: shuaicj/cloud-service-b:1.1.0
+    image: shuaicj/cloud-service-b:1.2.0
     environment:
       PORT: 8080
-      REGISTRY_SERVICE_URL: http://registry1:8761/eureka,http://registry2:8761/eureka
+      REGISTRY_SERVICE_URL: http://registry-0:8761/eureka,http://registry-1:8761/eureka
     expose:
       - 8080
 

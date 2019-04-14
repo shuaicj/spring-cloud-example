@@ -14,12 +14,12 @@ spec:
     spec:
       containers:
       - name: config
-        image: shuaicj/cloud-config:1.1.0
+        image: shuaicj/cloud-config:1.2.0
         env:
         - name: PORT
           value: "8888"
         - name: REGISTRY_SERVICE_URL
-          value: "http://registry-0.registry.default.svc.cluster.local:8761/eureka,http://registry-1.registry.default.svc.cluster.local:8761/eureka"
+          value: "http://registry-0.registry-headless.default.svc.cluster.local:8761/eureka,http://registry-1.registry-headless.default.svc.cluster.local:8761/eureka"
         ports:
         - name: http
           containerPort: 8888
