@@ -19,7 +19,7 @@ An example for learning Spring Cloud.
 #### How to Run
 
 ###### Run in docker-compose
-Make sure the port 8080 and 8761 is available.
+Make sure the port 8080 and 8761 is available, and the docker daemon can use 8G+ memory.
 ```
 $ mvn package
 $ docker-compose up --scale config=2 --scale service-a=2 --scale service-b=2
@@ -27,7 +27,7 @@ $ docker-compose up --scale config=2 --scale service-a=2 --scale service-b=2
 Check the eureka page `http://localhost:8761`.
 
 ###### Run in minikube
-Make sure the port 30000 and 30001 is available.
+Make sure the port 30000 and 30001 is available, and the minikube can use 8G+ memory.
 ```
 $ kubectl create -f k8s
 ```
