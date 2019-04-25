@@ -1,4 +1,4 @@
-version: '2.1'
+version: '2.2'
 
 services:
   registry-0:
@@ -25,6 +25,7 @@ services:
 
   config:
     image: shuaicj/cloud-config:1.2.0
+    scale: 2
     environment:
       PORT: 8888
       REGISTRY_SERVICE_URL: http://registry-0:8761/eureka,http://registry-1:8761/eureka
@@ -43,6 +44,7 @@ services:
 
   service-a:
     image: shuaicj/cloud-service-a:1.2.0
+    scale: 2
     environment:
       PORT: 8080
       REGISTRY_SERVICE_URL: http://registry-0:8761/eureka,http://registry-1:8761/eureka
@@ -51,6 +53,7 @@ services:
 
   service-b:
     image: shuaicj/cloud-service-b:1.2.0
+    scale: 2
     environment:
       PORT: 8080
       REGISTRY_SERVICE_URL: http://registry-0:8761/eureka,http://registry-1:8761/eureka
