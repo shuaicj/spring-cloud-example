@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>shuaicj.example.cloud</groupId>
-    <artifactId>cloud-example-parent</artifactId>
+    <artifactId>spring-cloud-example</artifactId>
     <version>1.2.0</version>
     <packaging>pom</packaging>
 
